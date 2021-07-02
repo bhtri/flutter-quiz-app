@@ -13,6 +13,10 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  # to handle SVGs for Android, iOS, and Web
+  websafe_svg: ^2.0.0
+  # state management, intelligent dependency injection, and route management
+  get: ^4.1.4
 
 dev_dependencies:
   flutter_test:
@@ -22,3 +26,5 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+  assets:
+    - assets/icons/
