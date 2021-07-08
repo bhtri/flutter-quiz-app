@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_app/constants.dart';
@@ -38,6 +40,50 @@ class ScoreScreen extends StatelessWidget {
                     .textTheme
                     .headline4!
                     .copyWith(color: kSecondaryColor),
+              ),
+              InkWell(
+                onTap: () {},
+                child: Container(
+                  margin: EdgeInsets.only(top: kDefaultPadding),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: kDefaultPadding * 2,
+                    vertical: kDefaultPadding / 2,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Text(
+                    'Restart',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(color: kGrayColor),
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  exit(0);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: kDefaultPadding),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: kDefaultPadding * 2,
+                    vertical: kDefaultPadding / 2,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Text(
+                    'Exit',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(color: kGrayColor),
+                  ),
+                ),
               ),
               Spacer(flex: 3),
             ],
