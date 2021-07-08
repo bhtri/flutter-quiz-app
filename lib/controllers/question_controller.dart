@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:quiz_app/models/Questions.dart';
+import 'package:quiz_app/screens/score/score_screen.dart';
 
 class QuestionController extends GetxController
     with SingleGetTickerProviderMixin {
@@ -29,7 +30,7 @@ class QuestionController extends GetxController
   bool _isAnswered = false;
   bool get isAnswered => this._isAnswered;
 
-  late int _correctAns;
+  int _correctAns = 0;
   int get correctAns => this._correctAns;
 
   late int _selectedAns;
@@ -88,16 +89,21 @@ class QuestionController extends GetxController
   }
 
   void nextQuestion() {
-    _isAnswered = false;
-    _pageController.nextPage(
-        duration: Duration(milliseconds: 250), curve: Curves.ease);
+    if (_questionNumber.value != _questions.length) {
+      _isAnswered = false;
+      _pageController.nextPage(
+          duration: Duration(milliseconds: 250), curve: Curves.ease);
 
-    // Reset the counter
-    _animationController.reset();
+      // Reset the counter
+      _animationController.reset();
 
-    // Then start it again
-    // Once timer is finish go to the next qn
-    _animationController.forward().whenComplete(nextQuestion);
+      // Then start it again
+      // Once timer is finish go to the next qn
+      _animationController.forward().whenComplete(nextQuestion);
+    } else {
+      // Get package provide us simple way to navigate another page
+      Get.to(ScoreScreen());
+    }
   }
 
   void updateTheQnNum(int index) {
