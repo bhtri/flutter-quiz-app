@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quiz_app/constants.dart';
+import 'package:quiz_app/controllers/question_controller.dart';
 import 'package:quiz_app/screens/quiz/components/progress_bar.dart';
+import 'package:quiz_app/screens/quiz/components/question_card.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
 class Body extends StatelessWidget {
@@ -10,6 +13,9 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // So that we have access our controller
+    QuestionController _questionController = Get.put(QuestionController());
+
     return Stack(
       children: [
         WebsafeSvg.asset(
@@ -19,35 +25,55 @@ class Body extends StatelessWidget {
           width: double.infinity,
         ),
         SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ProgressBar(),
-                SizedBox(height: kDefaultPadding),
-                Text.rich(
-                  TextSpan(
-                    text: 'Question 1',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4!
-                        .copyWith(color: kSecondaryColor),
-                    children: [
-                      TextSpan(
-                        text: '/10',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5!
-                            .copyWith(color: kSecondaryColor),
-                      ),
-                    ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                child: ProgressBar(),
+              ),
+              SizedBox(height: kDefaultPadding),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                child: Obx(() {
+                  return Text.rich(
+                    TextSpan(
+                      text:
+                          'Question ${_questionController.questionNumber.value}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4!
+                          .copyWith(color: kSecondaryColor),
+                      children: [
+                        TextSpan(
+                          text: '/${_questionController.questions.length}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5!
+                              .copyWith(color: kSecondaryColor),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ),
+              Divider(thickness: 1.5),
+              SizedBox(height: kDefaultPadding),
+              Expanded(
+                child: PageView.builder(
+                  // Block swipe to next qn
+                  physics: NeverScrollableScrollPhysics(),
+                  controller: _questionController.pageController,
+                  onPageChanged: _questionController.updateTheQnNum,
+                  itemCount: _questionController.questions.length,
+                  itemBuilder: (context, index) => QuestionCard(
+                    question: _questionController.questions[index],
                   ),
                 ),
-                Divider(thickness: 1.5),
-                SizedBox(height: kDefaultPadding),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],
