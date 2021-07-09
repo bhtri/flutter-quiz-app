@@ -42,7 +42,7 @@ class ScoreScreen extends StatelessWidget {
                     .copyWith(color: kSecondaryColor),
               ),
               InkWell(
-                onTap: () {},
+                onTap: _qnController.restart,
                 child: Container(
                   margin: EdgeInsets.only(top: kDefaultPadding),
                   padding: EdgeInsets.symmetric(

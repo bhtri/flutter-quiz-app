@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:quiz_app/models/Questions.dart';
+import 'package:quiz_app/screens/quiz/quiz_screen.dart';
 import 'package:quiz_app/screens/score/score_screen.dart';
 
 class QuestionController extends GetxController
@@ -102,11 +103,23 @@ class QuestionController extends GetxController
       _animationController.forward().whenComplete(nextQuestion);
     } else {
       // Get package provide us simple way to navigate another page
-      Get.to(ScoreScreen());
+      Get.to(() => ScoreScreen());
     }
   }
 
   void updateTheQnNum(int index) {
     _questionNumber.value = index + 1;
+  }
+
+  void restart() {
+    _isAnswered = false;
+    _correctAns = 0;
+    _numOfCorrectAns = 0;
+    _questionNumber = 1.obs;
+    _pageController = PageController();
+
+    _animationController.reset();
+    _animationController.forward().whenComplete(nextQuestion);
+    Get.to(() => QuizScreen());
   }
 }
