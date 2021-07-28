@@ -23,9 +23,18 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # launcher icon
+  flutter_launcher_icons: ^0.9.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/pie-chart.jpeg"
+
 
 flutter:
 
   uses-material-design: true
   assets:
     - assets/icons/
+    - assets/images/
