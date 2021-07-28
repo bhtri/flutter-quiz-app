@@ -17,6 +17,7 @@ dependencies:
   websafe_svg: ^2.0.0
   # state management, intelligent dependency injection, and route management
   get: ^4.1.4
+  dio: ^4.0.0
 
 dev_dependencies:
   flutter_test:

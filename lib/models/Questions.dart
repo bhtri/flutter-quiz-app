@@ -11,7 +11,7 @@ class Question {
   });
 }
 
-const List sample_data = [
+List sampleData = [
   {
     "id": 1,
     "question":

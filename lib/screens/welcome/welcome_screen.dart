@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_app/constants.dart';
-import 'package:quiz_app/screens/quiz/quiz_screen.dart';
+import 'package:quiz_app/screens/selection/selection_screen.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -47,7 +47,8 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   Spacer(), // 1/6
                   InkWell(
-                    onTap: () => Get.to(() => QuizScreen()),
+                    // onTap: () => Get.to(() => QuizScreen()),
+                    onTap: () => Get.to(() => SelectionScreen()),
                     child: Container(
                       width: double.infinity,
                       alignment: Alignment.center,
